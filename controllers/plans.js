@@ -1,4 +1,4 @@
-const Week = require('../models/week')
+const Week = require('../models/week');
 
 // const newWeek = {
 //   "name": "Only Chest",
@@ -104,11 +104,11 @@ const Week = require('../models/week')
 
 exports.getPlans = async (req, res, next) => {
   try {
-    const week = await Week.findOne({ _id: '5fa3c22478954b0c5e8b338d'});
+    const week = await Week.find();
     console.log(week);
     res.status(200).send(week);
   } catch (error) {
-   console.log(error.message); 
-   res.status(404).send({error: error.message});
+    console.log(error.message);
+    res.status(404).send({ error: error.message });
   }
 };
