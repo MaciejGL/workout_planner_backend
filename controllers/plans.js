@@ -109,5 +109,6 @@ exports.getPlans = async (req, res, next) => {
     res.status(200).send(week);
   } catch (error) {
    console.log(error.message); 
+   res.status(404).send({error: error.message});
   }
 };
