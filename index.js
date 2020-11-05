@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', plansRoutes);
+app.use(plansRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

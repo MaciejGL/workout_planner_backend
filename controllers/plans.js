@@ -104,8 +104,8 @@ const Week = require('../models/week');
 
 exports.getPlans = async (req, res, next) => {
   try {
-    const week = await Week.find();
-    console.log(week);
+    const week = await Week.find({});
+    console.log({ week });
     res.status(200).send(week);
   } catch (error) {
     console.log(error.message);
