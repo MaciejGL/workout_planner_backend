@@ -114,12 +114,29 @@ exports.getPlans = async (req, res, next) => {
 };
 exports.postPlans = async (req, res, next) => {
   try {
+    console.log(req.body);
     const user = await User.findById(req.userId);
     const week = new Week(req.body);
     const savedWeek = await week.save();
     user.plans.push(savedWeek._id);
     await user.save();
     res.status(200).send(savedWeek);
+  } catch (error) {
+    console.log(error.message);
+    res.status(404).send({ error: error.message });
+  }
+};
+exports.deletePlan = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userId);
+    const deletedWeek = await Week.findByIdAndDelete(req.params.id);
+    const updatedPlans = user.plans.filter(
+      plan => plan._id.toString() !== req.params.id.toString(),
+    );
+    console.log(updatedPlans);
+    user.plans = updatedPlans;
+    await user.save();
+    res.status(200).send('deletedWeek');
   } catch (error) {
     console.log(error.message);
     res.status(404).send({ error: error.message });
