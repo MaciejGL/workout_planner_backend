@@ -20,6 +20,7 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
+  req.userId = '5fa47d0477cdfa0a96e57690';
   next();
 });
 
