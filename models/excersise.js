@@ -21,11 +21,11 @@ const excersiseSchema = new Schema({
   duration: {
     type: String,
   },
-  // creator: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true,
-  // },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Excersise', excersiseSchema);
