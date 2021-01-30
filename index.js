@@ -2,11 +2,15 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const { herokuKeepAwake } = require('./utils/herokuKeepAwake');
 
 const plansRoutes = require('./routes/plans');
+const authRoutes = require('./routes/auth');
+const isAuth = require('./middleware/isAuth');
 
 const app = express();
 
+herokuKeepAwake();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,11 +24,12 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
-  req.userId = '5fa47d0477cdfa0a96e57690';
+  // req.userId = '5fa47d0477cdfa0a96e57690';
   next();
 });
-
+app.use(isAuth);
 app.use(plansRoutes);
+app.use(authRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

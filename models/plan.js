@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const daySchema = new Schema({
+const planSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -14,10 +14,10 @@ const daySchema = new Schema({
     ref: 'User',
     required: true
   },
-  excersises: [{
+  workoutWeeks: [{
     type: Schema.Types.ObjectId,
-    ref: 'Excersise'
+    ref: 'Weeks'
   }]
 }, { timestamps: true });
 
-module.exports = mongoose.model('Day', daySchema);
+module.exports = mongoose.model('Plan', planSchema);

@@ -9,9 +9,20 @@ const weekSchema = new Schema({
   description: {
     type: String,
   },
-  days: {
-    type: Array,
-  }
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  workoutDays: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Day'
+  }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Week', weekSchema);
